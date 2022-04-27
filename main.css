@@ -1,0 +1,59 @@
+/* 최상단 관련 CSS */
+.최상단 {
+    border: 1px #cccccc;
+    border-style: solid;
+    height: 3000px;
+    width: 1000px;
+    position: absolute;
+     left: 350px;
+     top: 40px;
+}
+
+.제목 {
+    height: 75px;
+    position: absolute;
+     left: 20px; 
+     top: 29px;
+}
+
+.목차 {
+    border: 1px #cccccc;
+    border-style: solid;
+    height: 250px;
+    width: 150px;
+    position: absolute;
+     left: 20px; 
+     top: 200px;
+}
+
+.공백 {
+    background-color: #008275;
+    height: 40px;
+}
+
+.분류 {
+    height: 250px;
+    width: 150px;
+    position: absolute;
+     left: 20px; 
+     top: 135px;
+}
+
+/* 본문 관련 CSS */
+
+.본문 {
+    border: 1px #cccccc;
+    border-style: solid;
+    height: 3000px;
+    width: 1000px;
+    position: absolute;
+     left: 350px;
+     top: 600px;
+
+}
+
+h2 {
+    position: absolute;
+     left: 25px;
+     top: 511px;
+}
