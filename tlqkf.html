@@ -11,7 +11,11 @@
 	<script>
 		const url = 'https://openapi.jeonju.go.kr/rest/medicalnew/getMedicalList';
 
-		fetch(url)
+		fetch(url, {
+           	   headers: {
+                    'Accept': 'application / json'
+                   }
+       	        })
 		.then(res => res.json())
 		.then(myJson => {
 			document.getElementById('data').innerText = JSON.stringify(myJson, null, 1);
