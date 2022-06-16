@@ -10,12 +10,12 @@
 	<p id="data"></p>
 	<script>
 		const url = 'https://openapi.jeonju.go.kr/rest/medicalnew/getMedicalList';
-
-		fetch(url, {
+		const config = {
            	   headers: {
-                    'Accept': 'application / json'
-                   }
-       	        })
+                	'Accept': 'application/json'
+           	    }
+      		}
+		fetch(url)
 		.then(res => res.json())
 		.then(myJson => {
 			document.getElementById('data').innerText = JSON.stringify(myJson, null, 1);
