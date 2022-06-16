@@ -3,13 +3,17 @@
 <head>
 	<meta charset="utf-8">
 	<title>다음 지도 API</title>
+	headers : { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+       }
 </head>
 <body>
 	<div id="map" style="width:100%;height:350px;"></div>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1813450b2c217175c1df5b5e6bf4c5e6&libraries=services,clusterer,drawing"></script>
 	<script>
 
-	        const fetch_url =
+	        const url =
 		  "https://quiet-anchorage-50325.herokuapp.com/https://openapi.jeonju.go.kr/rest/medicalnew"
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		    mapOption = {
@@ -37,7 +41,6 @@
 		    infowindow.colse();
 		  };
 		}
-		url = "https://bucklackbeard.github.io/Unicorn/kakaomapApitest.html"
 		fetch(url)
 		  .then((res) => res.json())
 		  .then((myjson) => {
