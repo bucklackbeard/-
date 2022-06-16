@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>다음 지도 API</title>
+</head>
+<body>
+	<div id="map" style="width:100%;height:350px;"></div>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1813450b2c217175c1df5b5e6bf4c5e6&libraries=services,clusterer,drawing"></script>
+	<script>
+		const url =
+		  "http://openapi.jeonju.go.kr/rest/medicalnew"
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		    mapOption = {
+		        center: new kakao.maps.LatLng(35.8242248, 127.1479532), // 지도의 중심좌표
+		        level: 12, // 지도의 확대 레벨
+		        mapTypeId : kakao.maps.MapTypeId.ROADMAP // 지도종류
+		    }; 
+
+		var map = new kakao.maps.Map(mapContainer, mapOption); 
+		
+		var clusterer = new kakao.maps.MarkerClusterer({
+			map: map, 
+			averageCenter: true,
+			minLevel: 10,
+		});
+
+		function makeOverListener(map, marker, infowindow) {
+		  return function () {
+		    infowindow.open(map, marker);
+		  };
+		}
+
+		function makeOverListener(infowindow) {
+		  return function () {
+		    infowindow.colse();
+		  };
+		}
+
+		fetch(url)
+		  .then((res) => res.json())
+		  .then((myjson) => {
+			var markers = [];
+			const mediAddr = myjson.mediAddr;
+			for (var i = 0; i < mediAddr.length; i++) {
+				// 마커 생성
+				var marker = new kakao.maps.Marker({
+				  postion: new kakao.maps.Latlng(mediAddr[i]['posy'], mediAddr[i]['posx']), //마커 좌표
+				});
+				// 인포윈도우 생성
+				var infowindow = new kakao.maps.Infowindow({
+				  content: mediAddr[i]["mediName"],
+				});
+
+				markers.push(marker);
+				kakao.maps.event.addListener(
+				  marker,
+				  "mouseover",
+				  makeOverListener(map, marker, infowindow)
+				);
+				markers.push(marker);
+				kakao.maps.event.addListener(
+				  marker,
+				  "mouseout",
+				  makeOverListener(map, marker, infowindow)
+				);
+			  }
+			  clusterer.addMarkers(markers);
+		    });
+	</script>
+</body>
+</html>
