@@ -37,8 +37,7 @@
 		    infowindow.colse();
 		  };
 		}
-		const url = "https://openapi.jeonju.go.kr/rest/medicalnew"
-		fetch(url)
+		fetch("https://openapi.jeonju.go.kr/rest/medicalnew")
 		  .then((res) => res.json())
 		  .then((myjson) => {
 			var markers = [];
