@@ -47,23 +47,7 @@
 				var marker = new kakao.maps.Marker({
 				  postion: new kakao.maps.Latlng(mediAddr[i]['posy'], mediAddr[i]['posx']), //마커 좌표
 				});
-				// 인포윈도우 생성
-				var infowindow = new kakao.maps.Infowindow({
-				  content: mediAddr[i]["mediName"],
-				});
-
-				markers.push(marker);
-				kakao.maps.event.addListener(
-				  marker,
-				  "mouseover",
-				  makeOverListener(map, marker, infowindow)
-				);
-				markers.push(marker);
-				kakao.maps.event.addListener(
-				  marker,
-				  "mouseout",
-				  makeOverListener(map, marker, infowindow)
-				);
+				
 			  }
 			  clusterer.addMarkers(markers);
 		    });
