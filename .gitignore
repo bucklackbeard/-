@@ -1,0 +1,6 @@
+.env
+media/
+chroma_db/
+__pycache__/
+*.pyc
+db.sqlite3

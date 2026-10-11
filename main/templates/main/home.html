@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>강의자료 PDF 질의응답</title>
+
+  <style>
+    body {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+      font-family: Arial, "Malgun Gothic", sans-serif;
+      line-height: 1.6;
+    }
+
+    section {
+      margin-top: 24px;
+      padding: 20px;
+      border: 1px solid #dddddd;
+      border-radius: 8px;
+    }
+
+    input[type="file"],
+    input[type="text"] {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 10px;
+      margin-top: 8px;
+      margin-bottom: 12px;
+    }
+
+    button {
+      padding: 10px 16px;
+      border: 0;
+      border-radius: 6px;
+      background-color: #2563eb;
+      color: white;
+      cursor: pointer;
+    }
+
+    .message {
+      padding: 12px;
+      border-radius: 6px;
+      background-color: #f3f4f6;
+    }
+
+    .success {
+      background-color: #dcfce7;
+      color: #166534;
+    }
+
+    .answer {
+      white-space: pre-wrap;
+      padding: 16px;
+      border-radius: 8px;
+      background-color: #f8fafc;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>강의자료 PDF 질의응답</h1>
+
+  <p>
+    PDF 파일을 업로드한 뒤, 해당 강의자료 내용을 바탕으로 질문할 수 있습니다.
+    새 PDF를 올리면 기존에 저장된 자료는 삭제됩니다.
+  </p>
+
+  {% if message %}
+    <p class="message {% if upload_success %}success{% endif %}">
+      {{ message }}
+    </p>
+  {% endif %}
+
+  <section>
+    <h2>1. 강의자료 PDF 업로드</h2>
+
+    <form
+      action="{% url 'upload_pdf' %}"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      {% csrf_token %}
+
+      <label for="pdf_file">PDF 파일 선택</label>
+
+      <input
+        type="file"
+        id="pdf_file"
+        name="pdf_file"
+        accept=".pdf,application/pdf"
+        required
+      >
+
+      <button type="submit">PDF 저장하기</button>
+    </form>
+  </section>
+
+  <section>
+    <h2>2. 강의자료에 질문하기</h2>
+
+    <form action="{% url 'ask_question' %}" method="post">
+      {% csrf_token %}
+
+      <label for="question">질문</label>
+
+      <input
+        type="text"
+        id="question"
+        name="question"
+        placeholder="예: 이 강의자료의 핵심 개념을 요약해줘."
+        required
+      >
+
+      <button type="submit">질문하기</button>
+    </form>
+  </section>
+
+  {% if answer %}
+    <section>
+      <h2>답변</h2>
+
+      <p><strong>질문:</strong> {{ question }}</p>
+
+      <div class="answer">{{ answer }}</div>
+    </section>
+  {% endif %}
+</body>
+</html>
